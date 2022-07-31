@@ -27,7 +27,7 @@ const HotelDetails = ({ route, navigation }) => {
         <View>
           <View style={{ height: 200 }}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 5, left: 5, zIndex: 1, width: 50, height: 50 }}>
-              <Image style={{ height: 20, width: 20, margin: 20 }} source={arrow} />
+              <Image style={styles.arrowImg} source={arrow} />
             </TouchableOpacity>
 
             <Image
@@ -36,12 +36,12 @@ const HotelDetails = ({ route, navigation }) => {
               style={{ width: "100%", height: "100%" }}
             />
           </View>
-          <View style={{ flexDirection: "row", padding: 15, backgroundColor: 'white' }}>
+          <View style={styles.fivethView}>
             <View style={{ flex: 3 }}>
               <View>
-                <Text style={{ fontWeight: "700", fontSize: 15 }}>{data.hotelName}</Text>
+                <Text style={styles.hotelName}>{data.hotelName}</Text>
               </View>
-              <View style={{ flexDirection: "row", opacity: 0.5, marginVertical: 10 }}>
+              <View style={styles.view7}>
                 <Image source={location} style={{ width: 16, height: 16, marginRight: 5 }} />
                 <Text style={{ fontSize: 15 }}>{data.areaName} - </Text>
                 <Text style={{ fontSize: 15 }}>{data.subAreaName}</Text>
@@ -60,61 +60,55 @@ const HotelDetails = ({ route, navigation }) => {
           </View>
         </View>
         <View
-          style={{
-            backgroundColor: 'white', padding: 5,
-            flexWrap:'wrap',
-            borderColor: '#639FD6',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-        <View style={{ flexDirection: 'row', backgroundColor: 'white' ,justifyContent:'center',alignItems:'center' }}>
-          <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => setDataList(1)}>
-            <Text>Detaylar</Text>
-            <View style={{ height: 2, backgroundColor: dataList === 1 ? '#639FD6' : 'grey', width: '100%' }} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => setDataList(2)}>
-            <Text>Kampanyalar</Text>
-            <View style={{ height: 2, backgroundColor: dataList === 2 ? '#639FD6' : 'grey', width: '100%' }} />
-          </TouchableOpacity>
-          
-        </View>
-        
-        {dataList === 1 && <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap', }}>
-          {data.hotelPropertyList.map((item) =>
-            <View style={{ width: '50%', marginVertical: 6, flexDirection:'row'}}>
-              <Image style={{ height: 10, width: 10, alignSelf:'center', marginLeft:30 }} source={tick} />
-              <Text style={{alignSelf:'center', marginLeft:10}}>{item.codeName}</Text></View>)}
-        </View>}
-        {dataList === 2 && <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap' }}>
-          {data.hotelThemeList.map((item) =>
-            <View style={{ width: '50%', marginVertical: 6, flexDirection:'row'}}>
-              <Image style={{ height: 10, width: 10, alignSelf:'center', marginLeft:30 }} source={tick} />
-              <Text style={{alignSelf:'center', marginLeft:10}}>{item.text === '' ? item.count : item.text}</Text></View>)}
-        </View>}
+          style={styles.view10}>
+          <View style={{ flexDirection: 'row', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => setDataList(1)}>
+              <Text>Detaylar</Text>
+              <View style={{ height: 2, backgroundColor: dataList === 1 ? '#639FD6' : 'grey', width: '100%' }} />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ flex: 1, alignItems: 'center' }} onPress={() => setDataList(2)}>
+              <Text>Kampanyalar</Text>
+              <View style={{ height: 2, backgroundColor: dataList === 2 ? '#639FD6' : 'grey', width: '100%' }} />
+            </TouchableOpacity>
 
-        <TouchableOpacity
-        onPress={toggleModal}
-          style={{
-            backgroundColor: 'white', padding: 5,
-            borderWidth: 1, borderRadius: 10,
-            borderColor: '#639FD6', width: '90%',
-            marginTop: 10,
-            flexDirection: 'row'
-          }}>
-          <Text style={{ color: '#639FD6', flex: 1, textAlign: 'center' }}>
-            Otelin Tüm Özellikleri</Text>
-          <Image source={right} style={{ width: 20, height: 20 }} /></TouchableOpacity>
           </View>
-          <View style={{flex:1}}>
-          <Modal isVisible={isModalVisible}>
-        <View style={{ backgroundColor:'white',height:'40%',borderRadius:20,justifyContent:'center',alignItems:'center'}}>
-          <Text>detay datası eksikti</Text>
-          <Button title="Geri" onPress={toggleModal} />
+
+          {dataList === 1 && <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap', }}>
+            {data.hotelPropertyList.map((item) =>
+              <View style={{ width: '50%', marginVertical: 6, flexDirection: 'row' }}>
+                <Image style={{ height: 10, width: 10, alignSelf: 'center', marginLeft: 30 }} source={tick} />
+                <Text style={{ alignSelf: 'center', marginLeft: 10 }}>{item.codeName}</Text></View>)}
+          </View>}
+          {dataList === 2 && <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap' }}>
+            {data.hotelThemeList.map((item) =>
+              <View style={{ width: '50%', marginVertical: 6, flexDirection: 'row' }}>
+                <Image style={{ height: 10, width: 10, alignSelf: 'center', marginLeft: 30 }} source={tick} />
+                <Text style={{ alignSelf: 'center', marginLeft: 10 }}>{item.text === '' ? item.count : item.text}</Text></View>)}
+          </View>}
+
+          <TouchableOpacity
+            onPress={toggleModal}
+            style={{
+              backgroundColor: 'white', padding: 5,
+              borderWidth: 1, borderRadius: 10,
+              borderColor: '#639FD6', width: '90%',
+              marginTop: 10,
+              flexDirection: 'row'
+            }}>
+            <Text style={{ color: '#639FD6', flex: 1, textAlign: 'center' }}>
+              Otelin Tüm Özellikleri</Text>
+            <Image source={right} style={{ width: 20, height: 20 }} /></TouchableOpacity>
         </View>
-      </Modal>
-          </View>
-      
-    
+        <View style={{ flex: 1 }}>
+          <Modal isVisible={isModalVisible}>
+            <View style={{ backgroundColor: 'white', height: '40%', borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+              <Text>detay datası eksikti</Text>
+              <Button title="Geri" onPress={toggleModal} />
+            </View>
+          </Modal>
+        </View>
+
+
       </View>
     </View>
 
@@ -132,4 +126,32 @@ const styles = StyleSheet.create({
     backgroundColor: "#5D6C2A",
     borderRadius: 8,
   },
+  arrowImg: {
+    height: 20,
+    width: 20,
+    margin: 20
+  },
+  fivethView: {
+    flexDirection: "row",
+    padding: 15,
+    backgroundColor: 'white'
+  },
+  hotelName: {
+    fontWeight: "700",
+    fontSize: 15
+  },
+  view7: {
+    flexDirection: "row",
+    opacity: 0.5,
+    marginVertical: 10
+  },
+  view10: {
+    backgroundColor: 'white',
+    padding: 5,
+    flexWrap: 'wrap',
+    borderColor: '#639FD6',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+
 });
